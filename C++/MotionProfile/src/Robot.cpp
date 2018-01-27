@@ -34,7 +34,7 @@ class Robot: public IterativeRobot {
 public:
 	/** The Talon we want to motion profile. */
 	TalonSRX _talon;
-	VictorSPX _vic;
+	TalonSRX _vic;
 
 	/** some example logic on how one can manage an MP */
 	MotionProfileExample _example;
@@ -73,25 +73,25 @@ public:
 	/**  function is called periodically during operator control */
 	void TeleopPeriodic() {
 		/* get buttons */
-		bool btns[10];
-		for (unsigned int i = 1; i < 10; ++i)
-			btns[i] = _joy.GetRawButton(i);
+//		bool btns[10];
+		//for (unsigned int i = 1; i < 10; ++i)
+			//btns[i] = _joy.GetRawButton(i);
 
 		/* get the left joystick axis on Logitech Gampead */
-		double leftYjoystick = -1 * _joy.GetY(); /* multiple by -1 so joystick forward is positive */
+		//double leftYjoystick = -1 * _joy.GetY(); /* multiple by -1 so joystick forward is positive */
 
 		/* call this periodically, and catch the output.  Only apply it if user wants to run MP. */
 		_example.control();
 		_example.PeriodicTask();
 
-		if (btns[5] == false) { /* Check button 5 (top left shoulder on the logitech gamead). */
+		if (false) { /* Check button 5 (top left shoulder on the logitech gamead). */
 			/*
 			 * If it's not being pressed, just do a simple drive.  This
 			 * could be a RobotDrive class or custom drivetrain logic.
 			 * The point is we want the switch in and out of MP Control mode.*/
 
 			/* button5 is off so straight drive */
-			_talon.Set(ControlMode::PercentOutput, 1.0 * leftYjoystick);
+			//_talon.Set(ControlMode::PercentOutput, 1.0 * leftYjoystick);
 
 			_example.reset();
 		} else {
@@ -107,17 +107,17 @@ public:
 			/* if btn is pressed and was not pressed last time,
 			 * In other words we just detected the on-press event.
 			 * This will signal the robot to start a MP */
-			if ((btns[6] == true) && (_btnsLast[6] == false)) {
+			if ((_btnsLast[6] == false)) {
 				/* user just tapped button 6 */
-
+				(_btnsLast[6] = true);
 				//------------ We could start an MP if MP isn't already running ------------//
 				_example.start();
 			}
 		}
 
 		/* save buttons states for on-press detection */
-		for (int i = 1; i < 10; ++i)
-			_btnsLast[i] = btns[i];
+		//for (int i = 1; i < 10; ++i)
+		//	_btnsLast[i] = btns[i];
 
 	}
 	/**  function is called periodically during disable */

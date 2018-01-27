@@ -6,14 +6,14 @@ enum Constants {
 	kTalonID = 0,
 
 	/* example Victor SPX follower */
-	kVictorFollower = 0,
+	kVictorFollower = 2,
 
 	/**
 	 * How many sensor units per rotation.
 	 * Using CTRE Magnetic Encoder.
 	 * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
 	 */
-	kSensorUnitsPerRotation = 4096,
+	kSensorUnitsPerRotation = 1024,
 
 	/**
 	 * Which PID slot to pull gains from.  Starting 2018, you can choose 
